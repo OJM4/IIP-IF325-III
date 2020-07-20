@@ -27,8 +27,8 @@ Public Class frmUsuario
             txtCorreo.SelectAll()
         Else
             insertarUsuaurio()
-            MessageBox.Show("Correo valido", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            'MessageBox.Show("Correo valido", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            conexion.conexion.Close()
         End If
 
 
@@ -47,11 +47,39 @@ Public Class frmUsuario
         Try
             If conexion.insertarUsuario(idUsuario, nombre, apellido, userName, psw, rol, estado, correo) Then
                 MessageBox.Show("Guardado", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                limpiar()
             Else
                 MessageBox.Show("Error al guardar", "Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                conexion.conexion.Close()
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub eliminarUsuario()
+        Dim idUsuario As Integer
+        Dim rol As String
+        idUsuario = txtCodigo.Text
+        rol = cmbRol.Text
+        Try
+            If (conexion.eliminarUsuario(idUsuario, rol)) Then
+                MsgBox("Dado de baja")
+                'conexion.conexion.Close()
+            Else
+                MsgBox("Error al dar de baja usuario")
+                'conexion.conexion.Close()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        limpiar()
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        eliminarUsuario()
     End Sub
 End Class
