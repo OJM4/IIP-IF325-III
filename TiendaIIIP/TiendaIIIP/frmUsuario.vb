@@ -2,7 +2,7 @@
 Public Class frmUsuario
     Dim conexion As New conexion()
     Private Sub frmUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conexion.conectar()
+        'conexion.conectar()
     End Sub
 
     'username@midominio.com
@@ -30,8 +30,6 @@ Public Class frmUsuario
             'MessageBox.Show("Correo valido", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
             conexion.conexion.Close()
         End If
-
-
     End Sub
     Private Sub insertarUsuaurio()
         Dim idUsuario As Integer
@@ -42,7 +40,7 @@ Public Class frmUsuario
         userName = txtUserName.Text
         psw = txtPsw.Text
         correo = txtCorreo.Text
-        estado = "activo"
+        estado = "eliminado"
         rol = cmbRol.Text
         Try
             If conexion.insertarUsuario(idUsuario, nombre, apellido, userName, psw, rol, estado, correo) Then
