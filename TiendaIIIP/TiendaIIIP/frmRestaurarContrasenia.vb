@@ -48,5 +48,4 @@ Public Class frmRestaurarContrasenia
             MessageBox.Show("Correo invalido", "Error")
         End Try
     End Sub
-
 End Class
